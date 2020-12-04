@@ -2,7 +2,6 @@
 % Data: 2020/11/29
 % function: Load the optogenetics data and convert it 
 
-% input: the .mat file
 % output: the mean plot figure & the mean plot data
 
 function MeanPlot = ChrimsonMeanPlot()
@@ -17,16 +16,17 @@ delta = (data.traces.raw./repmat(nanmean(data.traces.raw(:,floor(num_frames*0.02
 
 colors = linspecer(roi_num);
 
+    
+%x轴创建
+x = (1:20)/4;
+for i = 11 : 20
+    x(i) = x(i) + 0.5;
+end
+
 for n = 1 : roi_num
     
     gcf = figure;
-    
-    %x轴创建
-    x = (1:20)/4;
-    for i = 11 : 20
-        x(i) = x(i) + 0.5;
-    end
-    
+  
     for i = 20 : 20: 80
         MeanPlot(i/20,1:20,n) = delta(n,i-9:i+10);
         plot(x,delta(n,i-9:i+10));
@@ -36,13 +36,13 @@ for n = 1 : roi_num
             hl.LineWidth = 4;%更改线的粗细
             patch([x(10) x(11) x(11) x(10)], ...
                 [min(ylim) min(ylim), max(ylim) max(ylim)],'black','FaceAlpha',.05)
-
         end
     end
     xlabel('t/s')
     ylabel('{\Delta}F/F')
-    exportgraphics(gcf,[path,num2str(n), '.pdf'],'ContentType','vector',...
+    exportgraphics(gcf,[path,'roi_',num2str(n), '.pdf'],'ContentType','vector',...
         'BackgroundColor','none')
+    exportgraphics(gcf,[path,'roi_',num2str(n), '.png'])
 
 end
 save([path,'MeanPlot.mat'],'MeanPlot');
