@@ -6,8 +6,13 @@
 
 clear
 
-x = (1:20)/4;
-for i = 11 : 20
+% here is the capture parameter
+delta_points = 20; % points between every capture
+frame_rate = 4;
+duration = 0.5; % stimulation duration (s)
+
+x = (1:delta_points)/frame_rate;
+for i = delta_points/2 + 1 : delta_points
     x(i) = x(i) + 0.5;
 end
 

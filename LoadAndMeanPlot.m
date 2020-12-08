@@ -15,7 +15,7 @@ while 1
         clear input
         break;
     elseif isequal(input,'y')
-        [file, path] = uigetfile('*.mat','Choose .mat file','\\SunLabNASTS832\SunLabPrv\LvQT\AOTU project\photon_sti');
+        [file, path] = uigetfile('*.mat','Choose .mat file','D:\20201207\brain1_left');
         disp(['Load data from',path,file])
         delta = load([path,file]);
         data = cat(1,data,delta.MeanPlot);
@@ -67,7 +67,7 @@ for roi_number = 1 : size(data,3)% roi number
     save([savepath,'roi_',num2str(roi_number),'.mat'],'roi_data');
     hl = boundedline(x,mean(data(:,:,roi_number),1),std(data(:,:,roi_number),0,1),'cmap', colors(roi_number,:),'alpha');%汇出平均值及方差
     hl.LineWidth = 4;%更改线的粗细
-    patch([x(10) x(11) x(11) x(10)], ...
+    patch([x(delta_points/2) x(delta_points/2+1) x(delta_points/2+1) x(delta_points/2)], ...
         [min(ylim) min(ylim), max(ylim) max(ylim)],'black','FaceAlpha',.05)
     xlabel('t/s')
     ylabel('{\Delta}F/F')
