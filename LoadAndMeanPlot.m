@@ -15,7 +15,7 @@ while 1
         clear input
         break;
     elseif isequal(input,'y')
-        [file, path] = uigetfile('*.mat','Choose .mat file','D:\20201207\brain1_left');
+        [file, path] = uigetfile('*.mat','Choose .mat file','D:\201211');
         disp(['Load data from',path,file])
         delta = load([path,file]);
         data = cat(1,data,delta.MeanPlot);

@@ -9,7 +9,7 @@ function MeanPlot = ChrimsonMeanPlot()
 
 MeanPlot = [];
 
-[file, path] = uigetfile('*.mat','Choose traces.mat file for loading datas','D:\20201207\brain1_left');
+[file, path] = uigetfile('*.mat','Choose traces.mat file for loading datas','D:\201211\');
 data = load([path,file]);
 num_frames = length(data.traces.raw);
 roi_num = size(data.traces.raw,1);
