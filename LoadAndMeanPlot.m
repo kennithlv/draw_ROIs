@@ -15,7 +15,7 @@ while 1
         clear input
         break;
     elseif isequal(input,'y')
-        [file, path] = uigetfile('*.mat','Choose .mat file','D:\201211');
+        [file, path] = uigetfile('*.mat','Choose .mat file','\\SUNLABNASTS832\SunLabPrv\LvQT\AOTU project\photon_sti\201218\brain1_R');
         disp(['Load data from',path,file])
         delta = load([path,file]);
         data = cat(1,data,delta.MeanPlot);
@@ -45,12 +45,12 @@ end
 
 % here is the capture parameter
 delta_points = 20; % points between every capture
-frame_rate = 4;
+frame_rate = 8.7;
 duration = 0.5; % stimulation duration (s)
 
 x = (1:delta_points)/frame_rate;
 for i = delta_points/2 + 1 : delta_points
-    x(i) = x(i) + 0.5;
+    x(i) = x(i) + duration;
 end
 
 colors = linspecer(size(data,3));

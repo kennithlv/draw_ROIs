@@ -9,7 +9,9 @@ function MeanPlot = ChrimsonMeanPlot()
 
 MeanPlot = [];
 
-[file, path] = uigetfile('*.mat','Choose traces.mat file for loading datas','D:\201211\');
+filepath = '\\SUNLABNASTS832\SunLabPrv\LvQT\AOTU project\photon_sti\201218\brain1_R';
+
+[file, path] = uigetfile('*.mat','Choose traces.mat file for loading datas',filepath);
 data = load([path,file]);
 num_frames = length(data.traces.raw);
 roi_num = size(data.traces.raw,1);
@@ -19,18 +21,19 @@ colors = linspecer(roi_num);
 
 
 % load the txt file to divide the data
-[file_txt, path_txt] = uigetfile(['\*.txt'],'Choose .txt file to load time label');
+[file_txt, path_txt] = uigetfile(['\*.txt'],'Choose .txt file to load time label',filepath);
 [x_time_ms,sti_info] = importfile(fullfile(path_txt,file_txt));
 opto_sti_index = find(~cellfun(@isempty,sti_info) == 1);
 
-frame_rate = 4;
+frame_rate = 8.7;
+duration = 0.5;
 delta_points = unique(diff(opto_sti_index));
 
 
 %x轴创建
-x = (1:delta_points)/4;
+x = (1:delta_points)/frame_rate;
 for i = delta_points/2+1 : delta_points
-    x(i) = x(i) + 0.5;
+    x(i) = x(i) + duration;
 end
 
 for n = 1 : roi_num
